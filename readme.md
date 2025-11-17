@@ -1,0 +1,1 @@
+Eventually will be a website that hosts the installation of the nbody stuff, documentation for it, and a diary of sorts.
