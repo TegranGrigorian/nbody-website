@@ -12,8 +12,10 @@
     .code-switcher { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
     .code-switcher button { background:#0f0f10; color:#dcdcdc; border:1px solid #222; padding:8px 12px; border-radius:8px; cursor:pointer; }
     .code-switcher button.active { background:#04AA6D; color:#07110a; border-color: #04AA6D; }
-    .code-panel { display:none; background:#0b0b0b; padding:16px; border-radius:8px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); overflow:auto; max-height:720px; }
+    .code-panel { display:none; background:#0b0b0b; padding:16px; border-radius:8px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); position:relative; }
     .code-panel pre { margin:0; white-space: pre; font-family: "Fira Code", "Consolas", monospace; color:#e6e6e6; }
+    .copy-btn { position:absolute; top:8px; right:8px; background:#222; color:#dcdcdc; border:1px solid #333; padding:6px 8px; border-radius:6px; cursor:pointer; font-size:12px; }
+    .copy-btn.copied { background:#04AA6D; color:#07110a; border-color:#04AA6D; }
     .code-note { color:#bfbfbf; margin-bottom:8px; }
     .back-link { display:inline-block; margin-bottom:12px; color:#9ee9c9; text-decoration:none; }
     .back-link:hover { text-decoration:underline; }
@@ -391,7 +393,40 @@ b.update(dt)</code></pre>
         });
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <script>document.addEventListener('DOMContentLoaded', function(){ if(window.hljs) hljs.highlightAll(); });</script> -->
+</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>document.addEventListener('DOMContentLoaded', function(){ if(window.hljs) hljs.highlightAll(); });</script>
+        <script>
+        (function(){
+            document.querySelectorAll('.code-panel').forEach(panel => {
+                panel.style.position = panel.style.position || 'relative';
+                if (panel.querySelector('.copy-btn')) return;
+                const btn = document.createElement('button');
+                btn.className = 'copy-btn';
+                btn.type = 'button';
+                btn.textContent = 'Copy';
+                btn.addEventListener('click', async function(){
+                    const code = panel.querySelector('code');
+                    if(!code) return;
+                    const text = code.innerText;
+                    try {
+                        await navigator.clipboard.writeText(text);
+                    } catch(e) {
+                        const range = document.createRange();
+                        range.selectNodeContents(code);
+                        const sel = window.getSelection();
+                        sel.removeAllRanges();
+                        sel.addRange(range);
+                        document.execCommand('copy');
+                        sel.removeAllRanges();
+                    }
+                    btn.textContent = 'Copied!';
+                    btn.classList.add('copied');
+                    setTimeout(()=>{ btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+                });
+                panel.appendChild(btn);
+            });
+        })();
+        </script>
 </body>
 </html>
