@@ -26,5 +26,13 @@ def kosmos_docs():
 def body_docs():
     return flask.render_template('docs/nbody-simulator/body-docs.html')
 
+@app.route('/docs/nbody-simulator/nbody-simulator-docs.html')
+def nbody_simulator_docs():
+    return flask.render_template('docs/nbody-simulator/nbody-simulator-docs.html')
+
+@app.route('/docs/docs-option.html')
+def docs_option():
+    return flask.render_template('docs/docs-option.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
