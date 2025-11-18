@@ -17,5 +17,14 @@ def docs_page():
 @app.route('/docs/nbody-simulation-docs')
 def nbody_simulation_docs():
     return flask.render_template('docs/nbody-simulator/nbody-simulator-docs.html')
+
+@app.route('/docs/nbody-simulator/kosmos-docs')
+def kosmos_docs():
+    return flask.render_template('docs/nbody-simulator/kosmos-docs.html')
+
+@app.route('/docs/nbody-simulator/body-docs')
+def body_docs():
+    return flask.render_template('docs/nbody-simulator/body-docs.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
