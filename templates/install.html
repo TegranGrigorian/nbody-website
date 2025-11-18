@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install N-Body Simulator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="topnav">
+        <a href="blog">Blog</a>
+        <a href="docs">Docs</a>
+        <a class="active" href="install">Install</a>
+        <a href="/">Home</a>
+    </div>
+    <div class="doc-layout">
+        <aside class="sidebar">
+            <h3>Contents</h3>
+            <nav>
+                <ul>
+                    <li><a href="#linux">Linux</a>
+                        <ul>
+                            <li><a href="#linux-install">Install</a></li>
+                            <li><a href="#linux-venv">Virtualenv</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#windows">Windows</a>
+                        <ul>
+                            <li><a href="#windows-install">Install</a></li>
+                            <li><a href="#windows-venv">Virtualenv</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="markdown-content">
+            <h2>Installation</h2>
+
+            <section id="linux">
+                <h3>Linux</h3>
+                <ol>
+                    <li id="linux-install">Clone the repository:
+                        <pre><code>git clone https://github.com/TegranGrigorian/nbody-gui</code></pre>
+                    </li>
+                    <li>Install nbody module from its repository:
+                        <pre><code>git clone https://github.com/TegranGrigorian/n-body-simulator</code></pre>
+                        <p>Your directory should look like this:</p>
+                        <pre><code>.
+├── nbody-gui
+├───── * Some files
+└── n-body-simulator
+    ├── pyproject.toml
+    ├── README.md
+    ├── requirements.txt
+    └── setup.py</code></pre>
+                    </li>
+                    <li>Navigate to the GUI project directory:
+                        <pre><code>cd nbody-gui</code></pre>
+                    </li>
+                    <li id="linux-venv">Create virtual environment (optional but recommended):
+                        <pre><code>virtualenv .venv --python=python3
+ source .venv/bin/activate</code></pre>
+                    </li>
+                    <li>Install required dependencies:
+                        <pre><code>pip install -r requirements.txt</code></pre>
+                        <p>Install the nbody module using pip command:</p>
+                        <pre><code>pip install -e ../n-body-simulator</code></pre>
+                        <p><strong>NOTE:</strong> This is assuming that your directory looks like the one shown above. If it's different, change the file path <code>../n-body-simulator</code> accordingly.</p>
+                    </li>
+                    <li>Run the application:
+                        <pre><code>python main.py</code></pre>
+                    </li>
+                </ol>
+            </section>
+
+            <section id="windows">
+                <h3>Windows</h3>
+                <ol>
+                    <li id="windows-install">Clone the repositories (same commands):
+                        <pre><code>git clone https://github.com/TegranGrigorian/nbody-gui
+ git clone https://github.com/TegranGrigorian/n-body-simulator</code></pre>
+                    </li>
+                    <li>Open PowerShell / CMD and navigate to the GUI folder:
+                        <pre><code>cd nbody-gui</code></pre>
+                    </li>
+                    <li id="windows-venv">Create a virtual environment (Windows):
+                        <pre><code>python -m venv .venv
+.venv\Scripts\activate</code></pre>
+                    </li>
+                    <li>Install required dependencies:
+                        <pre><code>pip install -r requirements.txt</code></pre>
+                        <p>Install the nbody module using pip (adjust the path if needed):</p>
+                        <pre><code>pip install -e ..\n-body-simulator</code></pre>
+                    </li>
+                    <li>Run the application:
+                        <pre><code>python main.py</code></pre>
+                    </li>
+                </ol>
+            </section>
+
+        </main>
+    </div>
+    <div class="footer">
+        <p>Tegran Grigorian <a href="https://github.com/TegranGrigorian">GitHub</a></p>
+    </div>
+</body>
+</html>
