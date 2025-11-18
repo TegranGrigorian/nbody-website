@@ -157,3 +157,19 @@ body {
 
 /* Slightly dim the navigation text to reduce contrast */
 .topnav a { color: #e9e9e9; }
+
+/* Docs selector page styles */
+.docs-selector-page { padding: 40px 20px 80px; display: flex; flex-direction: column; align-items: center; }
+.selector-card { background: #131313; color: #e6e6e6; padding: 24px 28px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.6); text-align: center; max-width: 760px; width: 100%; margin-bottom: 28px; }
+.selector-card .muted { color: #bdbdbd; margin-top: 6px; }
+
+.docs-row { display: flex; gap: 24px; width: 100%; max-width: 980px; justify-content: center; }
+.doc-box { background: #1b1a1a; color: #e8e8e8; padding: 20px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); flex: 1 1 0; min-width: 260px; max-width: 460px; }
+.doc-box h3 { color: #04AA6D; margin-top: 0; }
+.doc-box p { color: #d0d0d0; }
+.doc-box a { color: #9ee9c9; }
+
+@media (max-width: 800px) {
+  .docs-row { flex-direction: column; align-items: stretch; }
+  .doc-box { max-width: none; }
+}

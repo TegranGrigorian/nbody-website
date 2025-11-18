@@ -10,5 +10,9 @@ def homepage():
 def install_page():
     return flask.render_template('install.html')
 
+@app.route('/docs')
+def docs_page():
+    return flask.render_template('docs-option.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
