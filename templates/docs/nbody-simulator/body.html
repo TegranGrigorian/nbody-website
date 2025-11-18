@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Body Class - Documentation</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="topnav">
+        <a href="/blog">Blog</a>
+        <a class="active" href="/docs">Docs</a>
+        <a href="/install">Install</a>
+        <a href="/">Home</a>
+    </div>
+    <main class="docs-page">
+        <div class="doc-box">
+            <header class="docs-header">
+                <h1>Body Class</h1>
+                <p class="muted">Represents a physical body in the simulation.</p>
+            </header>
+            <section class="docs-content" style="max-width:820px;margin:0 auto;">
+                <h2>Overview</h2>
+                <p>The <strong>Body</strong> class stores mass, position, velocity and provides methods used by the engine to compute forces and apply updates.</p>
+                <h3>Example</h3>
+                <pre><code>b = Body(mass=1.0, position=(0,0,0), velocity=(0,0,0))
+b.apply_force(force)
+                </code></pre>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

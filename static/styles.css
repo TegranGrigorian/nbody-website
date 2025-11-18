@@ -173,3 +173,55 @@ body {
   .docs-row { flex-direction: column; align-items: stretch; }
   .doc-box { max-width: none; }
 }
+
+/* Center single documentation pages */
+.docs-page {
+  display: flex;
+  justify-content: center; /* center child horizontally */
+  padding: 40px 20px;
+}
+
+.docs-page .doc-box {
+  width: 100%;
+  max-width: 900px; /* constrain width so it centers nicely */
+  margin: 0 auto; /* fallback centering */
+}
+
+/* Make images inside docs responsive and centered */
+.docs-content img,
+.doc-box img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 18px auto;
+  border-radius: 3px;
+}
+.doc-figure figcaption {
+  color: #bfbfbf;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 6px;
+}
+
+/* Cards row for class reference */
+.doc-cards-row { display:flex; gap:20px; margin: 18px 0 28px; justify-content: center; align-items: stretch; }
+.doc-card {
+  display: block;
+  background: #151515;
+  color: #e8e8e8;
+  padding: 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  flex: 1 1 0;
+  min-width: 220px;
+  max-width: 420px;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.doc-card h3 { color: #04AA6D; margin-top: 0; }
+.doc-card p { color: #d0d0d0; }
+.doc-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.6); }
+
+@media (max-width: 800px) {
+  .doc-cards-row { flex-direction: column; }
+}
