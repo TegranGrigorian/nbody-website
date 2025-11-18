@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Body Class Documentation - N-Body Simulation</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <style>
+    /* Local styles for code reference and tab switcher (match kosmos) */
+    .code-section { margin-top: 28px; }
+    .code-switcher { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
+    .code-switcher button { background:#0f0f10; color:#dcdcdc; border:1px solid #222; padding:8px 12px; border-radius:8px; cursor:pointer; }
+    .code-switcher button.active { background:#04AA6D; color:#07110a; border-color: #04AA6D; }
+    .code-panel { display:block; background:#0b0b0b; padding:16px; border-radius:8px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); overflow:auto; max-height:720px; }
+    .code-panel pre { margin:0; white-space: pre; font-family: "Fira Code", "Consolas", monospace; color:#e6e6e6; }
+    .back-link { display:inline-block; margin-bottom:12px; color:#9ee9c9; text-decoration:none; }
+    .back-link:hover { text-decoration:underline; }
+    .sidebar-back { color:#dcdcdc; text-decoration:none; display:inline-block; padding:6px 8px; border-radius:6px; background:#0f0f10; }
+    .sidebar { background: transparent; padding:10px 6px; }
+    </style>
+</head>
+<body>
+    <div class="topnav">
+        <a href="/blog">Blog</a>
+        <a class="active" href="/docs">Docs</a>
+        <a href="/install">Install</a>
+        <a href="/">Home</a>
+    </div>
+
+    <div class="doc-layout">
+        <aside class="sidebar">
+            <h3>Contents</h3>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#responsibilities">Key Responsibilities</a></li>
+                    <li><a href="#structure">Example Structure</a></li>
+                    <li><a href="#api-examples">API Examples</a></li>
+                    <li><a href="#code-example">Code Example</a></li>
+                </ul>
+            </nav>
+            <div style="margin-top:20px;">
+                <a class="sidebar-back" href="/docs/nbody-simulator/nbody-simulator-docs.html">← Back to Simulator Docs</a>
+            </div>
+        </aside>
+
+        <main class="docs-page">
+        <div class="doc-box">
+            <p>
+                <a class="back-link" href="/docs/nbody-simulator/nbody-simulator-docs.html">← Back to N-Body Simulator</a>
+                <a class="back-link" href="/docs/docs-option.html" style="margin-left:12px;">← Docs Home</a>
+            </p>
+            <header class="docs-header">
+                <h1>Body Class Documentation</h1>
+                <p class="muted">Reference and implementation notes for the <code>Body</code> class.</p>
+            </header>
+
+            <section class="docs-content" style="max-width:900px;margin:0 auto;">
+                <h2 id="overview">Overview</h2>
+                <p>The <strong>Body</strong> class represents a single physical point-mass with state (position, velocity), accumulated force, and computed acceleration. Bodies are updated by the simulation engine (<code>Kosmos</code>), which computes forces and advances bodies each timestep.</p>
+
+                <h2 id="responsibilities">Key Responsibilities</h2>
+                <ul>
+                    <li><strong>State Storage</strong> — maintain mass, position, velocity, acceleration and force accumulators.</li>
+                    <li><strong>Physics Helper Methods</strong> — compute acceleration from force and expose getters/setters used by the integrator.</li>
+                    <li><strong>Integration Hooks</strong> — provide simple update/step methods used by higher-level simulation loops.</li>
+                </ul>
+
+                <h2 id="structure">Example Structure</h2>
+                <p>The <code>Body</code> constructor initializes intrinsic properties; forces are accumulated by callers and the <code>compute_acceleration()</code> method computes acceleration using <code>a = f / m</code>.</p>
+
+                <section id="api-examples" class="code-section">
+                    <h2>API Examples</h2>
+                    <article class="api-example">
+                        <h3>Creating a Body</h3>
+                        <div class="code-panel">
+<pre><code class="language-cpp">// construct a body: mass, x, y, v_x, v_y
+Body b(1.0, 0.0, 0.0, 0.0, 0.0);
+</code></pre>
+                        </div>
+                    </article>
+
+                    <article class="api-example">
+                        <h3>Accessors</h3>
+                        <div class="code-panel">
+<pre><code class="language-cpp">double m = b.get_mass();
+double x = b.get_x();
+double vy = b.get_v_y();
+</code></pre>
+                        </div>
+                    </article>
+                </section>
+
+                <section id="code-example" class="code-section">
+                    <h2>Implementation (Body.cpp)</h2>
+                    <p>Below is the implementation of the <code>Body</code> class used by the simulator.</p>
+
+                    <div class="code-panel">
+<pre><code class="language-cpp">#include "body.hpp"
+
+Body::Body(double mass, double x, double y, double v_x, double v_y) 
+    : mass(mass), x(x), y(y), v_x(v_x), v_y(v_y), a_x(0), a_y(0), f_x(0), f_y(0) {
+        // construct the intristic properties, no force or a yet because no "universe" exists
+}
+
+double Body::get_mass() const {
+    return mass;
+}
+
+double Body::get_x() const {
+    return this->x;
+}
+
+double Body::get_y() const {
+    return y;
+}
+
+double Body::get_v_x() const {
+    return v_x;
+}
+
+double Body::get_v_y() const {
+    return v_y;
+}
+
+double Body::get_a_x() const {
+    return a_x;
+}
+
+double Body::get_a_y() const {
+    return a_y;
+}
+
+double Body::get_f_x() const {
+    return f_x;
+}
+
+double Body::get_f_y() const {
+    return f_y;
+}
+
+void Body::add_force(double f_x, double f_y) {
+    this->f_x += f_x;
+    this->f_y += f_y;
+}
+
+void Body::set_x(double x) {
+    this->x = x;
+}
+
+void Body::set_y(double y) {
+    this->y = y;
+}
+
+void Body::set_v_x(double v_x) {
+    this->v_x = v_x;
+}
+
+void Body::set_v_y(double v_y) {
+    this->v_y = v_y;
+}
+
+void Body::set_f_x(double f_x) {
+    this->f_x = f_x;
+}
+
+void Body::set_f_y(double f_y) {
+    this->f_y = f_y;
+}
+
+void Body::set_a_x(double a_x) {
+    this->a_x = a_x;
+}
+
+void Body::set_a_y(double a_y) {
+    this->a_y = a_y;
+}
+
+void Body::compute_acceleration() { // heart of physics: f = ma -> a = f/m
+    a_x = f_x / mass;
+    a_y = f_y / mass;
+}
+
+void Body::reset_force() {
+    f_x = 0;
+    f_y = 0;
+}
+
+void Body::update(double time_delta) {
+    // euler integration, 2nd smartest dude after newton
+    v_x += 0.5 * a_x * time_delta;
+    v_y += 0.5 * a_y * time_delta;
+
+    // Update position
+    x += v_x * time_delta;
+    y += v_y * time_delta;
+}
+
+void Body::update_velocity(double time_delta) {
+    v_x += 0.5 * a_x * time_delta;
+    v_y += 0.5 * a_y * time_delta;
+}
+
+void Body::step(double time_delta) {
+    update(time_delta);
+}
+</code></pre>
+                    </div>
+                </section>
+
+            </section>
+        </div>
+    </main>
+
+    </div>
+
+    <script>
+    // keep switcher function for compatibility (no-op when not used)
+    function switchCode(evt) {
+        const btn = evt.currentTarget;
+        const group = btn.getAttribute('data-group');
+        const lang = btn.getAttribute('data-lang');
+        document.querySelectorAll('.code-switcher button[data-group="'+group+'"]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.code-panel[data-group="'+group+'"]')?.forEach(panel => {
+            if (panel.getAttribute('data-lang') === lang) panel.style.display = 'block';
+            else panel.style.display = 'none';
+        });
+    }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function(){ if(window.hljs) hljs.highlightAll(); });</script>
+</body>
+</html>
