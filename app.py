@@ -34,5 +34,9 @@ def nbody_simulator_docs():
 def docs_option():
     return flask.render_template('docs/docs-option.html')
 
+@app.route('/docs/nbody-gui')
+def body_docs_html():
+    return flask.render_template('/docs/nbody-gui/nbody-gui-docs.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
