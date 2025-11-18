@@ -14,5 +14,8 @@ def install_page():
 def docs_page():
     return flask.render_template('docs/docs-option.html')
 
+@app.route('/docs/nbody-simulation-docs')
+def nbody_simulation_docs():
+    return flask.render_template('docs/nbody-simulator/nbody-simulator-docs.html')
 if __name__ == '__main__':
     app.run(debug=True)
