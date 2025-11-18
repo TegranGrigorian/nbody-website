@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Kosmos Class Documentation - N-Body Simulation</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <!-- highlight.js theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <style>
+    /* Local styles for code reference and tab switcher */
+    .code-section { margin-top: 28px; }
+    .code-switcher { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
+    .code-switcher button { background:#0f0f10; color:#dcdcdc; border:1px solid #222; padding:8px 12px; border-radius:8px; cursor:pointer; }
+    .code-switcher button.active { background:#04AA6D; color:#07110a; border-color: #04AA6D; }
+    .code-panel { display:none; background:#0b0b0b; padding:16px; border-radius:8px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); overflow:auto; max-height:520px; }
+    .code-panel pre { margin:0; white-space: pre; font-family: "Fira Code", "Consolas", monospace; color:#e6e6e6; }
+    .code-note { color:#bfbfbf; margin-bottom:8px; }
+    .back-link { display:inline-block; margin-bottom:12px; color:#9ee9c9; text-decoration:none; }
+    .back-link:hover { text-decoration:underline; }
+    .sidebar-back { color:#dcdcdc; text-decoration:none; display:inline-block; padding:6px 8px; border-radius:6px; background:#0f0f10; }
+    .sidebar { background: transparent; padding:10px 6px; }
+    </style>
+</head>
+<body>
+    <div class="topnav">
+        <a href="/blog">Blog</a>
+        <a class="active" href="/docs">Docs</a>
+        <a href="/install">Install</a>
+        <a href="/">Home</a>
+    </div>
+
+    <div class="doc-layout">
+        <aside class="sidebar">
+            <h3>Contents</h3>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#responsibilities">Key Responsibilities</a></li>
+                    <li><a href="#structure">Example Structure</a></li>
+                    <li><a href="#api-examples">API Examples</a></li>
+                    <li><a href="#code-example">Code Example</a></li>
+                </ul>
+            </nav>
+            <div style="margin-top:20px;">
+                <a class="sidebar-back" href="/docs/nbody-simulator/nbody-simulator-docs.html">← Back to Simulator Docs</a>
+            </div>
+        </aside>
+
+        <main class="docs-page">
+        <div class="doc-box">
+            <p><a class="back-link" href="/docs/nbody-simulator/nbody-simulator-docs.html">← Back to N-Body Simulator</a></p>
+            <header class="docs-header">
+                <h1>Kosmos Class Documentation</h1>
+                <p class="muted">Detailed reference for the Kosmos class in the N-Body Simulation engine.</p>
+            </header>
+
+            <section class="docs-content" style="max-width:900px;margin:0 auto;">
+                <h2 id="overview">Overview</h2>
+                <p>The <strong>Kosmos</strong> class owns and updates a collection of <em>Body</em> objects. It provides the simulation loop, time-step control, and body management APIs used by higher-level tools.</p>
+
+                <h2 id="responsibilities">Key Responsibilities</h2>
+                <ul>
+                    <li><strong>Body Management</strong> — add/remove bodies and maintain their state.</li>
+                    <li><strong>Simulation Loop</strong> — advance the simulation by computing forces and integrating motion.</li>
+                    <li><strong>Time-step Control</strong> — expose configuration and stable stepping behavior.</li>
+                </ul>
+
+                <h2 id="structure">Example Structure</h2>
+                <p>Example: a Sun–Earth–Moon system managed by a single <em>Kosmos</em> instance. The engine updates body positions/velocities each step according to computed forces.</p>
+                <figure class="doc-figure">
+                    <img src="/static/nbody-simulator/docs/sun-earth-moon-example.png" alt="Sun-Earth-Moon example" />
+                    <figcaption>Example: <em>Kosmos</em> managing Sun, Earth and Moon bodies.</figcaption>
+                </figure>
+
+                <!-- APIS / Examples: sections with short description + per-section language switcher -->
+                <section id="api-examples" class="code-section">
+                    <h2>API Examples</h2>
+
+                    <!-- Example 1: Advancing the simulation -->
+                    <article class="api-example">
+                        <h3>Advancing the simulation</h3>
+                        <p>Use <code>Kosmos::step(time_delta)</code> to advance the simulation by a time interval. This performs force calculation and integrates body motions for the given timestep.</p>
+                        <div class="note">Note: choose a timestep small enough to maintain numerical stability for close encounters.</div>
+
+                        <div class="code-switcher" aria-label="Language selector example-advance">
+                            <button data-group="advance" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="advance" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="advance" data-lang="cpp" style="display:block;"><code class="language-cpp">// advance simulation by dt (C++)
+Kosmos world;
+// ... add bodies ...
+double dt = 0.01; // seconds
+world.step(dt);
+                            </code></pre>
+                            <pre class="code-panel" data-group="advance" data-lang="py" style="display:none;"><code class="language-python"># advance simulation by dt (Python)
+from _nbody_core import Kosmos
+world = Kosmos([])
+# ... add bodies ...
+dt = 0.01
+world.step(dt)
+                            </code></pre>
+                        </div>
+                    </article>
+
+                    <!-- Example 2: Adding a body -->
+                    <article class="api-example">
+                        <h3>Adding a body</h3>
+                        <p>Create a <code>Body</code> and add it to the <code>Kosmos</code> instance. The engine will include it in subsequent steps.</p>
+
+                        <div class="code-switcher" aria-label="Language selector example-add">
+                            <button data-group="add" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="add" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="add" data-lang="cpp" style="display:block;"><code class="language-cpp">// create and add body (C++)
+Body b(1.0, 0.0, 0.0, 0.0, 0.0); // mass, x, y, v_x, v_y
+world.add_body(b);
+                            </code></pre>
+
+                            <pre class="code-panel" data-group="add" data-lang="py" style="display:none;"><code class="language-python"># create and add body (Python)
+from _nbody_core import Body
+b = Body(1.0, 0.0, 0.0, 0.0, 0.0)
+world.add_body(b)
+                            </code></pre>
+                        </div>
+                    </article>
+
+                    <!-- Example 3: Inspecting bodies -->
+                    <article class="api-example">
+                        <h3>Inspecting bodies</h3>
+                        <p>Retrieve the list of bodies and inspect properties like position and velocity.</p>
+
+                        <div class="code-switcher" aria-label="Language selector example-inspect">
+                            <button data-group="inspect" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="inspect" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="inspect" data-lang="cpp" style="display:block;"><code class="language-cpp">// inspect bodies (C++)
+auto list = world.get_bodies();
+for (const auto &b : list) {
+    printf("mass=%f x=%f y=%f\n", b.get_mass(), b.get_x(), b.get_y());
+}
+                            </code></pre>
+
+                            <pre class="code-panel" data-group="inspect" data-lang="py" style="display:none;"><code class="language-python"># inspect bodies (Python)
+for b in world.get_bodies():
+    print(f"mass={b.get_mass()} x={b.get_x()} y={b.get_y()}")
+                            </code></pre>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- Code Example: usage scenario with C++ and Python snippets -->
+                <section id="code-example" class="code-section">
+                    <h2>Code Example</h2>
+                    <p>Short synopsis: This scenario runs a simple Earth–Sun orbital simulation using realistic masses and a 1-hour timestep. The example shows how to construct bodies, create a <code>Kosmos</code> instance, run the simulation for a year (or shorter), and inspect positions.</p>
+
+                    <div class="code-switcher" aria-label="Language selector example-scenario">
+                        <button data-group="scenario" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                        <button data-group="scenario" data-lang="py" onclick="switchCode(event)">Python</button>
+                    </div>
+
+                    <div class="code-panel-group">
+                        <pre class="code-panel" data-group="scenario" data-lang="cpp" style="display:block;"><code class="language-cpp">#include "orbit.h"
+#include "../constants.h"
+#include "cstdio"
+#include "cmath" // also can be angle brackets and chevrons for cstdio and cmath
+
+void test_orbit_simulation() {
+    // Earth-Sun system with real values
+    // Sun: 1.989×10³⁰ kg at origin
+    // Earth: 5.972×10²⁴ kg at 1 AU with orbital velocity
+    Body sun(1.989e30, 0.0, 0.0, 0.0, 0.0);
+    Body earth(5.972e24, AU_M, 0.0, 0.0, 29780.0); // 29780 ms orbit vel
+
+    std::vector<Body> bodies = { sun, earth };
+    Kosmos kosmos(bodies);
+    
+
+    printf("Earth-Sun Orbital Simulation\n");
+    printf("Sun: mass=%.3e kg at oriigin\n", sun.get_mass());
+    printf("Earth: mass=%.3e kg at %.3e m 1au\n", earth.get_mass(), earth.get_x());
+    printf("Earth orbital velocity: %.0f m/s  ~29,780 m/s\n", earth.get_v_y());
+    printf("Expected orbital period: 365.25 days\n\n");
+
+    const double time_step = 3600.0; // 1 hour timestep
+    const int num_steps = 8760; // 365 days
+    const int output_interval = 730; // Output every ~30 days
+
+    double initial_distance = earth.get_x();
+    
+    for (int step = 0; step < num_steps; ++step) {
+        kosmos.step(time_step);
+        
+        if (step % output_interval == 0) {
+            const auto & current_bodies = kosmos.get_bodies();
+            const Body & e = current_bodies[1];
+            
+            // Calculate distance from sun
+            double dist = sqrt(e.get_x() * e.get_x() + e.get_y() * e.get_y());
+            double vel = sqrt(e.get_v_x() * e.get_v_x() + e.get_v_y() * e.get_v_y());
+            
+            printf("Day %3.0f: pos=(%.3e, %.3e) m, dist=%.3e m (%.2f AU), vel=%.0f m/s\n", 
+                   (step * time_step) / DAY_TO_SECONDS,  // DAY_TO_SECONDS conversion
+                   e.get_x(), e.get_y(), 
+                   dist, dist / AU_M,
+                   vel);
+        }
+    }
+    
+    // Final check
+    const auto & final_bodies = kosmos.get_bodies();
+    const Body & final_earth = final_bodies[1];
+    double final_distance = sqrt(final_earth.get_x() * final_earth.get_x() + 
+                                  final_earth.get_y() * final_earth.get_y());
+    
+    printf("\nResults\n");
+    printf("Initial distance: %.3e m (%.3f AU)\n", initial_distance, initial_distance / AU_M);
+    printf("Final distance:   %.3e m (%.3f AU)\n", final_distance, final_distance / AU_M);
+    printf("Distance change:  %.2f%%\n", 
+           (final_distance - initial_distance) / initial_distance * 100);
+}
+</code></pre>
+
+                        <pre class="code-panel" data-group="scenario" data-lang="py" style="display:none;"><code class="language-python">import nbody
+
+# Create Sun and Earth
+sun = nbody.Body(1.989e30, 0.0, 0.0, 0.0, 0.0)
+earth = nbody.Body(5.972e24, nbody.AU, 0.0, 0.0, 29780.0)
+
+# Create simulation
+sim = nbody.Kosmos([sun, earth])
+
+# Run for 1 day
+for _ in range(24):
+    sim.step(3600.0)  # 1 hour steps
+
+# Check positions
+bodies = sim.get_bodies()
+print(f"Earth: x={bodies[1].get_x():.3e}, y={bodies[1].get_y():.3e}")
+</code></pre>
+                    </div>
+                </section>
+
+                <!-- end code-section -->
+            </section>
+        </div>
+    </main>
+
+    <script>
+    // switchCode: per-group language switcher. Buttons have data-group and data-lang.
+    function switchCode(evt) {
+        const btn = evt.currentTarget;
+        const group = btn.getAttribute('data-group');
+        const lang = btn.getAttribute('data-lang');
+
+        // toggle active class for buttons in same group
+        document.querySelectorAll('.code-switcher button[data-group="'+group+'"]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // show/hide panels
+        document.querySelectorAll('.code-panel[data-group="'+group+'"]').forEach(panel => {
+            if (panel.getAttribute('data-lang') === lang) panel.style.display = 'block';
+            else panel.style.display = 'none';
+        });
+    }
+    </script>
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    
+</body>
+</html>
