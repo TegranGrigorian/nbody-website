@@ -12,7 +12,7 @@ def install_page():
 
 @app.route('/docs')
 def docs_page():
-    return flask.render_template('docs-option.html')
+    return flask.render_template('docs/docs-option.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
