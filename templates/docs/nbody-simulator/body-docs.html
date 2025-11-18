@@ -12,8 +12,9 @@
     .code-switcher { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
     .code-switcher button { background:#0f0f10; color:#dcdcdc; border:1px solid #222; padding:8px 12px; border-radius:8px; cursor:pointer; }
     .code-switcher button.active { background:#04AA6D; color:#07110a; border-color: #04AA6D; }
-    .code-panel { display:block; background:#0b0b0b; padding:16px; border-radius:8px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); overflow:auto; max-height:720px; }
+    .code-panel { display:none; background:#0b0b0b; padding:16px; border-radius:8px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); overflow:auto; max-height:720px; }
     .code-panel pre { margin:0; white-space: pre; font-family: "Fira Code", "Consolas", monospace; color:#e6e6e6; }
+    .code-note { color:#bfbfbf; margin-bottom:8px; }
     .back-link { display:inline-block; margin-bottom:12px; color:#9ee9c9; text-decoration:none; }
     .back-link:hover { text-decoration:underline; }
     .sidebar-back { color:#dcdcdc; text-decoration:none; display:inline-block; padding:6px 8px; border-radius:6px; background:#0f0f10; }
@@ -72,142 +73,412 @@
 
                 <section id="api-examples" class="code-section">
                     <h2>API Examples</h2>
+
+                    <!-- Construct -->
                     <article class="api-example">
-                        <h3>Creating a Body</h3>
-                        <div class="code-panel">
-<pre><code class="language-cpp">// construct a body: mass, x, y, v_x, v_y
-Body b(1.0, 0.0, 0.0, 0.0, 0.0);
-</code></pre>
+                        <h3>Constructing a Body</h3>
+                        <p>Instantiate a <code>Body</code> with mass, position and optionally velocity.</p>
+                        <div class="code-switcher" aria-label="Language selector create-body">
+                            <button data-group="create" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="create" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="create" data-lang="cpp" style="display:block;"><code class="language-cpp">// construct a body: mass, x, y, v_x, v_y
+Body b(1.0, 0.0, 0.0, 0.0, 0.0);</code></pre>
+                            <pre class="code-panel" data-group="create" data-lang="py" style="display:none;"><code class="language-python"># construct a body (Python)
+from _nbody_core import Body
+b = Body(1.0, 0.0, 0.0, 0.0, 0.0)</code></pre>
                         </div>
                     </article>
 
+                    <!-- Getters -->
                     <article class="api-example">
-                        <h3>Accessors</h3>
-                        <div class="code-panel">
-<pre><code class="language-cpp">double m = b.get_mass();
-double x = b.get_x();
-double vy = b.get_v_y();
-</code></pre>
+                        <h3>Getters</h3>
+                        <p>Read individual state values using the getters below. Each example shows the single method usage.</p>
+
+                        <!-- get_mass -->
+                        <h4>get_mass()</h4>
+                        <div class="code-switcher" aria-label="get_mass">
+                            <button data-group="get_mass" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="get_mass" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="get_mass" data-lang="cpp" style="display:block;"><code class="language-cpp">double m = b.get_mass();</code></pre>
+                            <pre class="code-panel" data-group="get_mass" data-lang="py" style="display:none;"><code class="language-python">m = b.get_mass()</code></pre>
+                        </div>
+
+                        <!-- get_x -->
+                        <h4>get_x()</h4>
+                        <div class="code-switcher" aria-label="get_x">
+                            <button data-group="get_x" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="get_x" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="get_x" data-lang="cpp" style="display:block;"><code class="language-cpp">double x = b.get_x();</code></pre>
+                            <pre class="code-panel" data-group="get_x" data-lang="py" style="display:none;"><code class="language-python">x = b.get_x()</code></pre>
+                        </div>
+
+                        <!-- get_y -->
+                        <h4>get_y()</h4>
+                        <div class="code-switcher" aria-label="get_y">
+                            <button data-group="get_y" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="get_y" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="get_y" data-lang="cpp" style="display:block;"><code class="language-cpp">double y = b.get_y();</code></pre>
+                            <pre class="code-panel" data-group="get_y" data-lang="py" style="display:none;"><code class="language-python">y = b.get_y()</code></pre>
+                        </div>
+
+                        <!-- get_v_x -->
+                        <h4>get_v_x()</h4>
+                        <div class="code-switcher" aria-label="get_v_x">
+                            <button data-group="get_v_x" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="get_v_x" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="get_v_x" data-lang="cpp" style="display:block;"><code class="language-cpp">double vx = b.get_v_x();</code></pre>
+                            <pre class="code-panel" data-group="get_v_x" data-lang="py" style="display:none;"><code class="language-python">vx = b.get_v_x()</code></pre>
+                        </div>
+
+                        <!-- get_v_y -->
+                        <h4>get_v_y()</h4>
+                        <div class="code-switcher" aria-label="get_v_y">
+                            <button data-group="get_v_y" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="get_v_y" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="get_v_y" data-lang="cpp" style="display:block;"><code class="language-cpp">double vy = b.get_v_y();</code></pre>
+                            <pre class="code-panel" data-group="get_v_y" data-lang="py" style="display:none;"><code class="language-python">vy = b.get_v_y()</code></pre>
+                        </div>
+
+                        <!-- get_a_x -->
+                        <h4>get_a_x()</h4>
+                        <div class="code-switcher" aria-label="get_a_x">
+                            <button data-group="get_a_x" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="get_a_x" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="get_a_x" data-lang="cpp" style="display:block;"><code class="language-cpp">double ax = b.get_a_x();</code></pre>
+                            <pre class="code-panel" data-group="get_a_x" data-lang="py" style="display:none;"><code class="language-python">ax = b.get_a_x()</code></pre>
+                        </div>
+
+                        <!-- get_a_y -->
+                        <h4>get_a_y()</h4>
+                        <div class="code-switcher" aria-label="get_a_y">
+                            <button data-group="get_a_y" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="get_a_y" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="get_a_y" data-lang="cpp" style="display:block;"><code class="language-cpp">double ay = b.get_a_y();</code></pre>
+                            <pre class="code-panel" data-group="get_a_y" data-lang="py" style="display:none;"><code class="language-python">ay = b.get_a_y()</code></pre>
+                        </div>
+
+                        <!-- get_f_x -->
+                        <h4>get_f_x()</h4>
+                        <div class="code-switcher" aria-label="get_f_x">
+                            <button data-group="get_f_x" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="get_f_x" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="get_f_x" data-lang="cpp" style="display:block;"><code class="language-cpp">double fx = b.get_f_x();</code></pre>
+                            <pre class="code-panel" data-group="get_f_x" data-lang="py" style="display:none;"><code class="language-python">fx = b.get_f_x()</code></pre>
+                        </div>
+
+                        <!-- get_f_y -->
+                        <h4>get_f_y()</h4>
+                        <div class="code-switcher" aria-label="get_f_y">
+                            <button data-group="get_f_y" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="get_f_y" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="get_f_y" data-lang="cpp" style="display:block;"><code class="language-cpp">double fy = b.get_f_y();</code></pre>
+                            <pre class="code-panel" data-group="get_f_y" data-lang="py" style="display:none;"><code class="language-python">fy = b.get_f_y()</code></pre>
+                        </div>
+                    </article>
+
+                    <!-- Setters -->
+                    <article class="api-example">
+                        <h3>Setters</h3>
+                        <p>Mutate state using the setters. Each example demonstrates a single setter.</p>
+
+                        <!-- set_x -->
+                        <h4>set_x(x)</h4>
+                        <div class="code-switcher" aria-label="set_x">
+                            <button data-group="set_x" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="set_x" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="set_x" data-lang="cpp" style="display:block;"><code class="language-cpp">b.set_x(1.0);</code></pre>
+                            <pre class="code-panel" data-group="set_x" data-lang="py" style="display:none;"><code class="language-python">b.set_x(1.0)</code></pre>
+                        </div>
+
+                        <!-- set_y -->
+                        <h4>set_y(y)</h4>
+                        <div class="code-switcher" aria-label="set_y">
+                            <button data-group="set_y" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="set_y" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="set_y" data-lang="cpp" style="display:block;"><code class="language-cpp">b.set_y(-2.5);</code></pre>
+                            <pre class="code-panel" data-group="set_y" data-lang="py" style="display:none;"><code class="language-python">b.set_y(-2.5)</code></pre>
+                        </div>
+
+                        <!-- set_v_x -->
+                        <h4>set_v_x(vx)</h4>
+                        <div class="code-switcher" aria-label="set_v_x">
+                            <button data-group="set_v_x" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="set_v_x" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="set_v_x" data-lang="cpp" style="display:block;"><code class="language-cpp">b.set_v_x(10.0);</code></pre>
+                            <pre class="code-panel" data-group="set_v_x" data-lang="py" style="display:none;"><code class="language-python">b.set_v_x(10.0)</code></pre>
+                        </div>
+
+                        <!-- set_v_y -->
+                        <h4>set_v_y(vy)</h4>
+                        <div class="code-switcher" aria-label="set_v_y">
+                            <button data-group="set_v_y" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="set_v_y" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="set_v_y" data-lang="cpp" style="display:block;"><code class="language-cpp">b.set_v_y(-5.0);</code></pre>
+                            <pre class="code-panel" data-group="set_v_y" data-lang="py" style="display:none;"><code class="language-python">b.set_v_y(-5.0)</code></pre>
+                        </div>
+
+                        <!-- set_f_x -->
+                        <h4>set_f_x(fx)</h4>
+                        <div class="code-switcher" aria-label="set_f_x">
+                            <button data-group="set_f_x" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="set_f_x" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="set_f_x" data-lang="cpp" style="display:block;"><code class="language-cpp">b.set_f_x(0.0);</code></pre>
+                            <pre class="code-panel" data-group="set_f_x" data-lang="py" style="display:none;"><code class="language-python">b.set_f_x(0.0)</code></pre>
+                        </div>
+
+                        <!-- set_f_y -->
+                        <h4>set_f_y(fy)</h4>
+                        <div class="code-switcher" aria-label="set_f_y">
+                            <button data-group="set_f_y" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="set_f_y" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="set_f_y" data-lang="cpp" style="display:block;"><code class="language-cpp">b.set_f_y(0.0);</code></pre>
+                            <pre class="code-panel" data-group="set_f_y" data-lang="py" style="display:none;"><code class="language-python">b.set_f_y(0.0)</code></pre>
+                        </div>
+
+                        <!-- set_a_x -->
+                        <h4>set_a_x(ax)</h4>
+                        <div class="code-switcher" aria-label="set_a_x">
+                            <button data-group="set_a_x" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="set_a_x" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="set_a_x" data-lang="cpp" style="display:block;"><code class="language-cpp">b.set_a_x(0.1);</code></pre>
+                            <pre class="code-panel" data-group="set_a_x" data-lang="py" style="display:none;"><code class="language-python">b.set_a_x(0.1)</code></pre>
+                        </div>
+
+                        <!-- set_a_y -->
+                        <h4>set_a_y(ay)</h4>
+                        <div class="code-switcher" aria-label="set_a_y">
+                            <button data-group="set_a_y" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="set_a_y" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="set_a_y" data-lang="cpp" style="display:block;"><code class="language-cpp">b.set_a_y(-0.1);</code></pre>
+                            <pre class="code-panel" data-group="set_a_y" data-lang="py" style="display:none;"><code class="language-python">b.set_a_y(-0.1)</code></pre>
+                        </div>
+                    </article>
+
+                    <!-- Logic methods -->
+                    <article class="api-example">
+                        <h3>Logic & Helpers</h3>
+                        <p>Methods that perform calculations or state changes: forces, acceleration, integration.</p>
+
+                        <!-- add_force -->
+                        <h4>add_force(fx, fy)</h4>
+                        <div class="code-switcher" aria-label="add_force">
+                            <button data-group="add_force" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="add_force" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="add_force" data-lang="cpp" style="display:block;"><code class="language-cpp">b.add_force(1.0e5, -2.0e5);</code></pre>
+                            <pre class="code-panel" data-group="add_force" data-lang="py" style="display:none;"><code class="language-python">b.add_force(1.0e5, -2.0e5)</code></pre>
+                        </div>
+
+                        <!-- compute_acceleration -->
+                        <h4>compute_acceleration()</h4>
+                        <div class="code-switcher" aria-label="compute_acceleration">
+                            <button data-group="compute_acceleration" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="compute_acceleration" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="compute_acceleration" data-lang="cpp" style="display:block;"><code class="language-cpp">b.compute_acceleration();
+// then read with get_a_x/get_a_y</code></pre>
+                            <pre class="code-panel" data-group="compute_acceleration" data-lang="py" style="display:none;"><code class="language-python">b.compute_acceleration()
+# then read with b.get_a_x()</code></pre>
+                        </div>
+
+                        <!-- reset_force -->
+                        <h4>reset_force()</h4>
+                        <div class="code-switcher" aria-label="reset_force">
+                            <button data-group="reset_force" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="reset_force" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="reset_force" data-lang="cpp" style="display:block;"><code class="language-cpp">b.reset_force();</code></pre>
+                            <pre class="code-panel" data-group="reset_force" data-lang="py" style="display:none;"><code class="language-python">b.reset_force()</code></pre>
+                        </div>
+
+                        <!-- update -->
+                        <h4>update(time_delta)</h4>
+                        <div class="code-switcher" aria-label="update">
+                            <button data-group="update" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="update" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="update" data-lang="cpp" style="display:block;"><code class="language-cpp">double dt = 0.1; // seconds
+b.update(dt);</code></pre>
+                            <pre class="code-panel" data-group="update" data-lang="py" style="display:none;"><code class="language-python">dt = 0.1
+b.update(dt)</code></pre>
+                        </div>
+
+                        <!-- update_velocity -->
+                        <h4>update_velocity(time_delta)</h4>
+                        <div class="code-switcher" aria-label="update_velocity">
+                            <button data-group="update_velocity" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="update_velocity" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="update_velocity" data-lang="cpp" style="display:block;"><code class="language-cpp">b.update_velocity(dt);</code></pre>
+                            <pre class="code-panel" data-group="update_velocity" data-lang="py" style="display:none;"><code class="language-python">b.update_velocity(dt)</code></pre>
+                        </div>
+
+                        <!-- step -->
+                        <h4>step(time_delta)</h4>
+                        <div class="code-switcher" aria-label="step">
+                            <button data-group="step" data-lang="cpp" class="active" onclick="switchCode(event)">C++</button>
+                            <button data-group="step" data-lang="py" onclick="switchCode(event)">Python</button>
+                        </div>
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="step" data-lang="cpp" style="display:block;"><code class="language-cpp">b.step(dt);</code></pre>
+                            <pre class="code-panel" data-group="step" data-lang="py" style="display:none;"><code class="language-python">b.step(dt)</code></pre>
                         </div>
                     </article>
                 </section>
 
-                <section id="code-example" class="code-section">
-                    <h2>Implementation (Body.cpp)</h2>
-                    <p>Below is the implementation of the <code>Body</code> class used by the simulator.</p>
+                    <!-- Code Example: Full implementation + bindings -->
+                    <section id="code-example" class="code-section">
+                        <h2>Implementation & Bindings</h2>
+                        <p>Below are the C++ implementation of <code>Body</code> and the pybind11 bindings that expose the C++ classes to Python.</p>
 
-                    <div class="code-panel">
-<pre><code class="language-cpp">#include "body.hpp"
+                        <div class="code-switcher" aria-label="Language selector body-impl">
+                            <button data-group="body_impl" data-lang="cpp" class="active" onclick="switchCode(event)">C++ (body.cpp)</button>
+                            <button data-group="body_impl" data-lang="bindings" onclick="switchCode(event)">C++ (bindings.cpp)</button>
+                            <button data-group="body_impl" data-lang="py" onclick="switchCode(event)">Python usage</button>
+                        </div>
 
-Body::Body(double mass, double x, double y, double v_x, double v_y) 
-    : mass(mass), x(x), y(y), v_x(v_x), v_y(v_y), a_x(0), a_y(0), f_x(0), f_y(0) {
-        // construct the intristic properties, no force or a yet because no "universe" exists
-}
+                        <div class="code-panel-group">
+                            <pre class="code-panel" data-group="body_impl" data-lang="cpp" style="display:block;"><code class="language-cpp">#include "body.hpp"
 
-double Body::get_mass() const {
-    return mass;
-}
+    Body::Body(double mass, double x, double y, double v_x, double v_y) 
+        : mass(mass), x(x), y(y), v_x(v_x), v_y(v_y), a_x(0), a_y(0), f_x(0), f_y(0) {
+            // construct the intristic properties, no force or a yet because no "universe" exists
+    }
 
-double Body::get_x() const {
-    return this->x;
-}
+    double Body::get_mass() const { return mass; }
+    double Body::get_x() const { return this->x; }
+    double Body::get_y() const { return y; }
+    double Body::get_v_x() const { return v_x; }
+    double Body::get_v_y() const { return v_y; }
+    double Body::get_a_x() const { return a_x; }
+    double Body::get_a_y() const { return a_y; }
+    double Body::get_f_x() const { return f_x; }
+    double Body::get_f_y() const { return f_y; }
 
-double Body::get_y() const {
-    return y;
-}
+    void Body::add_force(double f_x, double f_y) { this->f_x += f_x; this->f_y += f_y; }
+    void Body::set_x(double x) { this->x = x; }
+    void Body::set_y(double y) { this->y = y; }
+    void Body::set_v_x(double v_x) { this->v_x = v_x; }
+    void Body::set_v_y(double v_y) { this->v_y = v_y; }
+    void Body::set_f_x(double f_x) { this->f_x = f_x; }
+    void Body::set_f_y(double f_y) { this->f_y = f_y; }
+    void Body::set_a_x(double a_x) { this->a_x = a_x; }
+    void Body::set_a_y(double a_y) { this->a_y = a_y; }
 
-double Body::get_v_x() const {
-    return v_x;
-}
+    void Body::compute_acceleration() { a_x = f_x / mass; a_y = f_y / mass; }
+    void Body::reset_force() { f_x = 0; f_y = 0; }
 
-double Body::get_v_y() const {
-    return v_y;
-}
+    void Body::update(double time_delta) {
+        v_x += 0.5 * a_x * time_delta;
+        v_y += 0.5 * a_y * time_delta;
+        x += v_x * time_delta;
+        y += v_y * time_delta;
+    }
 
-double Body::get_a_x() const {
-    return a_x;
-}
+    void Body::update_velocity(double time_delta) { v_x += 0.5 * a_x * time_delta; v_y += 0.5 * a_y * time_delta; }
+    void Body::step(double time_delta) { update(time_delta); }</code></pre>
 
-double Body::get_a_y() const {
-    return a_y;
-}
+                            <pre class="code-panel" data-group="body_impl" data-lang="bindings" style="display:none;"><code class="language-cpp">#include &lt;pybind11/pybind11.h&gt;
+    #include &lt;pybind11/stl.h&gt;
+    #include "body/body.hpp"
+    #include "kosmos/kosmos.hpp"
 
-double Body::get_f_x() const {
-    return f_x;
-}
+    namespace py = pybind11;
 
-double Body::get_f_y() const {
-    return f_y;
-}
+    PYBIND11_MODULE(_nbody_core, m) {
+        m.doc() = "N-body gravitational simulator - C++ core module";
+    
+        py::class_<Body>(m, "Body")
+            .def(py::init&lt;double, double, double, double, double&gt;(),
+                 py::arg("mass"), py::arg("x"), py::arg("y"), py::arg("v_x") = 0.0, py::arg("v_y") = 0.0,
+                 "Create a body with mass, position (x, y), and velocity (v_x, v_y)")
+            .def("get_mass", &Body::get_mass)
+            .def("get_x", &Body::get_x)
+            .def("get_y", &Body::get_y)
+            .def("get_v_x", &Body::get_v_x)
+            .def("get_v_y", &Body::get_v_y)
+            .def("get_a_x", &Body::get_a_x)
+            .def("get_a_y", &Body::get_a_y)
+            .def("get_f_x", &Body::get_f_x)
+            .def("get_f_y", &Body::get_f_y)
+            .def("set_x", &Body::set_x)
+            .def("set_y", &Body::set_y)
+            .def("set_v_x", &Body::set_v_x)
+            .def("set_v_y", &Body::set_v_y)
+            .def("__repr__", [](const Body &b){ return "<Body mass=" + std::to_string(b.get_mass()) + ", pos=(" + std::to_string(b.get_x()) + "," + std::to_string(b.get_y()) + ")>"; });
 
-void Body::add_force(double f_x, double f_y) {
-    this->f_x += f_x;
-    this->f_y += f_y;
-}
+        py::class_<Kosmos>(m, "Kosmos")
+            .def(py::init&lt;const std::vector&lt;Body&gt;&gt;())
+            .def("step", &Kosmos::step)
+            .def("get_bodies", &Kosmos::get_bodies);
 
-void Body::set_x(double x) {
-    this->x = x;
-}
+        m.attr("G_CONST") = 6.67430e-11;
+        m.attr("AU") = 1.496e11;
+    }</code></pre>
 
-void Body::set_y(double y) {
-    this->y = y;
-}
+                            <pre class="code-panel" data-group="body_impl" data-lang="py" style="display:none;"><code class="language-python"># Python usage via pybind11 bindings
+    from _nbody_core import Body, Kosmos, AU
 
-void Body::set_v_x(double v_x) {
-    this->v_x = v_x;
-}
+    # create bodies
+    sun = Body(1.989e30, 0.0, 0.0, 0.0, 0.0)
+    earth = Body(5.972e24, AU, 0.0, 0.0, 29780.0)
 
-void Body::set_v_y(double v_y) {
-    this->v_y = v_y;
-}
+    # create simulation
+    sim = Kosmos([sun, earth])
 
-void Body::set_f_x(double f_x) {
-    this->f_x = f_x;
-}
+    # step simulation
+    sim.step(3600.0)  # 1 hour step
 
-void Body::set_f_y(double f_y) {
-    this->f_y = f_y;
-}
-
-void Body::set_a_x(double a_x) {
-    this->a_x = a_x;
-}
-
-void Body::set_a_y(double a_y) {
-    this->a_y = a_y;
-}
-
-void Body::compute_acceleration() { // heart of physics: f = ma -> a = f/m
-    a_x = f_x / mass;
-    a_y = f_y / mass;
-}
-
-void Body::reset_force() {
-    f_x = 0;
-    f_y = 0;
-}
-
-void Body::update(double time_delta) {
-    // euler integration, 2nd smartest dude after newton
-    v_x += 0.5 * a_x * time_delta;
-    v_y += 0.5 * a_y * time_delta;
-
-    // Update position
-    x += v_x * time_delta;
-    y += v_y * time_delta;
-}
-
-void Body::update_velocity(double time_delta) {
-    v_x += 0.5 * a_x * time_delta;
-    v_y += 0.5 * a_y * time_delta;
-}
-
-void Body::step(double time_delta) {
-    update(time_delta);
-}
-</code></pre>
-                    </div>
+    # inspect bodies
+    for b in sim.get_bodies():
+        print(b)
+    </code></pre>
+                        </div>
+                    </section>
                 </section>
+
+                <!-- End of code examples -->
 
             </section>
         </div>
