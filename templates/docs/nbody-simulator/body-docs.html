@@ -7,28 +7,28 @@
     <link rel="stylesheet" href="/static/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
     <style>
-    /* Local styles for code reference and tab switcher (match kosmos) */
+    /* Local styles for code reference and tab switcher (use theme variables) */
     .code-section { margin-top: 28px; }
     .code-switcher { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
-    .code-switcher button { background:#0f0f10; color:#dcdcdc; border:1px solid #222; padding:8px 12px; border-radius:8px; cursor:pointer; }
-    .code-switcher button.active { background:#04AA6D; color:#07110a; border-color: #04AA6D; }
-    .code-panel { display:none; background:#0b0b0b; padding:16px; border-radius:8px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); position:relative; }
-    .code-panel pre { margin:0; white-space: pre; font-family: "Fira Code", "Consolas", monospace; color:#e6e6e6; }
-    .copy-btn { position:absolute; top:8px; right:8px; background:#222; color:#dcdcdc; border:1px solid #333; padding:6px 8px; border-radius:6px; cursor:pointer; font-size:12px; }
-    .copy-btn.copied { background:#04AA6D; color:#07110a; border-color:#04AA6D; }
-    .code-note { color:#bfbfbf; margin-bottom:8px; }
-    .back-link { display:inline-block; margin-bottom:12px; color:#9ee9c9; text-decoration:none; }
+    .code-switcher button { background: transparent; color: var(--muted); border:1px solid rgba(255,255,255,0.03); padding:8px 12px; border-radius:8px; cursor:pointer; }
+    .code-switcher button.active { background: var(--accent); color:#0b0b09; border-color: rgba(255,138,101,0.12); }
+    .code-panel { display:none; background: var(--bg-1); color: var(--text); padding:16px; border-radius:8px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); position:relative; }
+    .code-panel pre { margin:0; white-space: pre; font-family: "Fira Code", "Consolas", monospace; color:var(--text); }
+    .copy-btn { position:absolute; top:8px; right:8px; background:#222; color:var(--text); border:1px solid #333; padding:6px 8px; border-radius:6px; cursor:pointer; font-size:12px; }
+    .copy-btn.copied { background: var(--accent); color:#0b0b09; border-color:var(--accent); }
+    .code-note { color:var(--muted); margin-bottom:8px; }
+    .back-link { display:inline-block; margin-bottom:12px; color:var(--accent-2); text-decoration:none; }
     .back-link:hover { text-decoration:underline; }
-    .sidebar-back { color:#dcdcdc; text-decoration:none; display:inline-block; padding:6px 8px; border-radius:6px; background:#0f0f10; }
+    .sidebar-back { color:var(--muted); text-decoration:none; display:inline-block; padding:6px 8px; border-radius:6px; background:var(--bg-2); }
     .sidebar { background: transparent; padding:10px 6px; }
     </style>
 </head>
 <body>
     <div class="topnav">
-        <a href="/blog">Blog</a>
+        <a href="/">Home</a>
         <a class="active" href="/docs">Docs</a>
         <a href="/install">Install</a>
-        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
     </div>
 
     <div class="doc-layout">
