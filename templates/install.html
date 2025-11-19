@@ -115,5 +115,47 @@ git clone https://github.com/TegranGrigorian/n-body-simulator</code></pre>
     <!-- highlight.js script and DOM-ready initialization -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script>document.addEventListener('DOMContentLoaded', function(){ if(window.hljs) hljs.highlightAll(); });</script>
+    <script>
+    // Add copy buttons to command-style code blocks on this page (skip file-tree blocks)
+    (function(){
+        function isFileTree(text){
+            return /[├└│]/.test(text) || /^\./m.test(text);
+        }
+
+        document.querySelectorAll('pre > code').forEach(code => {
+            const classes = (code.className||'').toLowerCase();
+            // target shell/bash code blocks (commands)
+            if(!(classes.includes('language-bash') || classes.includes('language-sh') || classes.includes('language-shell') || classes.includes('language-bash'))) return;
+            const text = code.innerText || '';
+            if(isFileTree(text)) return; // skip ascii tree blocks
+
+            const pre = code.parentElement;
+            if(!pre) return;
+            // avoid adding duplicate buttons
+            if(pre.querySelector('.copy-btn')) return;
+
+            pre.style.position = pre.style.position || 'relative';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'copy-btn';
+            btn.textContent = 'Copy';
+            btn.addEventListener('click', async () => {
+                try{
+                    await navigator.clipboard.writeText(text);
+                }catch(e){
+                    // fallback
+                    const range = document.createRange();
+                    range.selectNodeContents(code);
+                    const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+                    document.execCommand('copy'); sel.removeAllRanges();
+                }
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(()=>{ btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+            });
+            pre.appendChild(btn);
+        });
+    })();
+    </script>
 </body>
 </html>

@@ -265,7 +265,35 @@ body {
   background: var(--card) !important;
   color: var(--text) !important;
 }
-.media-card img, .doc-figure img { width:100% !important; height:auto !important; max-height:420px !important; object-fit:contain !important; border-radius:10px !important; }
+.media-card img { width:100% !important; height:auto !important; max-height:420px !important; object-fit:contain !important; border-radius:10px !important; }
+
+/* Figures: images should appear inline without a large dark card; videos keep the padded card */
+.doc-figure img {
+  width: auto !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: 360px !important;
+  object-fit: contain !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  display: block !important;
+  margin: 12px auto !important;
+}
+
+.doc-figure video {
+  width: 100% !important;
+  max-height: 420px !important;
+  object-fit: contain !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  display: block !important;
+  margin: 12px auto !important;
+}
+
 .demo video { width:100% !important; max-height:360px !important; object-fit:contain !important; border-radius:8px !important; }
 
 /* Feature cards and states */
