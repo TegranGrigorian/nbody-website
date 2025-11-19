@@ -22,6 +22,20 @@
 	.muted { color:#bfbfbf; }
 	.control-list { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 	@media (max-width:900px) { .doc-layout { flex-direction:column; } .control-list{grid-template-columns:1fr;} }
+
+	/* Center figures, images, and demo videos for screenshots */
+	.doc-figure { text-align: center; margin: 18px 0; }
+	.doc-figure img,
+	.doc-figure video { max-width: 100%; height: auto; display: block; margin: 12px auto; border-radius: 6px; box-shadow: 0 6px 18px rgba(0,0,0,0.45); }
+	.doc-figure figcaption { color: #bfbfbf; font-size: 0.95rem; margin-top: 8px; }
+
+	/* States panel: two-column split describing UI states */
+	.states { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 18px 0; }
+	.state-box { background: #0b0b0b; padding: 14px; border-radius: 8px; box-shadow: 0 6px 16px rgba(0,0,0,0.45); }
+	.state-box h4 { margin: 0 0 8px 0; }
+	.state-box p { margin:Mode 0; color: #d0d6d6; line-height: 1.45; }
+	@media (max-width:700px) { .states { grid-template-columns: 1fr; } }
+
 	</style>
 </head>
 <body>
@@ -39,21 +53,26 @@
 				<ul>
 					<li><a href="#overview">Overview</a></li>
 					<li><a href="#getting-started">Getting Started</a></li>
+					<li><a href="#states">States</a></li>
 					<li><a href="#controls">Controls</a></li>
-					<li><a href="#shortcuts">Keyboard Shortcuts</a></li>
-					<li><a href="#screenshots">Screenshot Tips</a></li>
+					<li>
+						<a href="#walkthroughs">Walkthroughs</a>
+						<ul>
+							<li><a href="#earth-sun">Earth–Sun System</a></li>
+							<li><a href="#preset-solar-system">Preset Solar System</a></li>
+						</ul>
+					</li>
 					<li><a href="#troubleshooting">Troubleshooting</a></li>
 				</ul>
 			</nav>
 			<div style="margin-top:20px;">
-				<a class="sidebar-back" href="/docs/nbody-simulator/nbody-simulator-docs.html">← Back to Simulator Docs</a>
+                <a class="back-link" href="/docs/docs-option.html" style="margin-left:12px;">← Docs Home</a>
 			</div>
 		</aside>
 
 		<main class="docs-page">
 		<div class="doc-box" style="max-width:900px;margin:0 auto;">
 			<p>
-				<a class="back-link" href="/docs/nbody-simulator/nbody-simulator-docs.html">← Back to N-Body Simulator</a>
 				<a class="back-link" href="/docs/docs-option.html" style="margin-left:12px;">← Docs Home</a>
 			</p>
 			<header class="docs-header">
@@ -75,6 +94,19 @@
 						<figcaption>N-Body GUI main interface.</figcaption>
 					</figure>
 				</ol>
+
+				<h2 id="states">States</h2>
+				<div class="states">
+					<div class="state-box">
+						<h4>God Mode</h4>
+						<p>God Mode lets you place and edit bodies directly on the canvas. Use the Body Editor to change properties like name and mass, set orbits with Auto Orbit, and prepare the scene before running the integrator.</p>
+					</div>
+					<div class="state-box">
+						<h4>Simulation Mode</h4>
+						<p>Simulation Mode runs the physics integrator and advances bodies through time. Use the playback tools to Play, Pause, or Stop & Return; view controls let you center or capture all bodies for presentation screenshots.</p>
+					</div>
+				</div>
+
 				<h2 id="controls">Controls</h2>
 				<div class="control-list">
 					<div>
@@ -101,7 +133,7 @@
 				<p>Step-by-step examples to set up common systems in the GUI. These walkthroughs are intended to get you a presentable simulation quickly for screenshots or demos.</p>
 
 				<article class="walkthrough">
-					<h3>Earth–Sun System</h3>
+					<h3 id="earth-sun">Earth–Sun System</h3>
 					<ol>
 						<li>Left click on the black grid to <strong>Add Body</strong>
                         <figure class="doc-figure">
@@ -136,7 +168,7 @@
 				</article>
 
 				<article class="walkthrough">
-					<h3>Preset Solar System</h3>
+					<h3 id="preset-solar-system">Preset Solar System</h3>
 					<ol>
 						<li>Left click the<strong>Presets</strong> menu, a variety of different n-body presets will appear.</li>
                         <figure class="doc-figure">
@@ -189,11 +221,10 @@
 							If it still won't start, run it from the terminal and inspect the error output — common issues are missing packages or an incompatible Python version.
 						</li>
 					</ol>
-					<p>Other tips:</p>
-					<ul>
-						<li>Large body counts can slow rendering — reduce particle count or increase timestep.</li>
-						<li>Check the browser console for errors and report them in the project's issue tracker with the terminal output attached.</li>
-					</ul>
+					<section class="troubleshoot-addendum">
+						<h3 id="performance-reporting">Performance & Error Reporting</h3>
+						<p><strong>Large simulations:</strong> High body counts can slow rendering — try reducing the particle count or increasing the timestep to improve performance.</p>
+					</section>
 				</section>
 			</section>
 		</div>
