@@ -9,7 +9,6 @@ Jinja2==3.1.6
 kiwisolver==1.4.9
 MarkupSafe==3.0.3
 matplotlib==3.10.7
--e git+ssh://git@github.com/TegranGrigorian/n-body-simulator.git@778b314cdbd279cbf5781cb02e1a4243d3858dd7#egg=nbody_simulator
 numpy==2.3.5
 packaging==25.0
 pillow==12.0.0
