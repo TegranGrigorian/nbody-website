@@ -38,5 +38,8 @@ def docs_option():
 def body_docs_html():
     return flask.render_template('docs/nbody-gui/nbody-gui-docs.html')
 
+@app.route('/about')
+def about_page():
+    return flask.render_template('/about.html')
 if __name__ == '__main__':
     app.run(debug=True)
