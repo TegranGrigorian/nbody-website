@@ -138,18 +138,63 @@
 				<article class="walkthrough">
 					<h3>Preset Solar System</h3>
 					<ol>
-						<li>Open the <strong>Presets</strong> menu and choose <strong>Solar System</strong>. This will populate the canvas with Sun, planets, and (optionally) major moons.</li>
-						<li>Inspect the loaded bodies in the inspector panel. For cleaner screenshots, hide or remove small/distant bodies (asteroids) and focus on major planets.</li>
-						<li>Increase canvas resolution and hide side panels (if supported) to produce a clean image.</li>
-						<li>Run the simulation and use <strong>Time Warp</strong> or longer timesteps to show orbital motion quickly. Use the export feature to capture high-quality images.</li>
+						<li>Left click the<strong>Presets</strong> menu, a variety of different n-body presets will appear.</li>
+                        <figure class="doc-figure">
+                            <img src="/static/nbody-gui/nbody-gui_Preset-st1.png" alt="N-Body GUI Presets Menu">
+                            <figcaption>N-Body GUI Presets Menu.</figcaption>
+                        </figure>
+						<li>Click on <strong>Solar System</strong> to load a preset of our solar system.</li>
+                        <figure class="doc-figure">
+                            <img src="/static/nbody-gui/nbody-gui_Preset-st2.png" alt="Solar System Preset in N-Body GUI">
+                            <figcaption>Solar System preset loaded in the N-Body GUI.</figcaption>
+                        </figure>
+						<li>Next, click on the <strong>Focus</strong> dropdown menu. Then select <strong>Jupiter</strong></li>
+                        <figure class="doc-figure">
+                            <img src="/static/nbody-gui/nbody-gui_Preset-st3.png" alt="Focusing on Jupiter in N-Body GUI">
+                            <figcaption>Focusing the camera on Jupiter.</figcaption>
+                        </figure>
+						<li>Lastly, press <strong>Play</strong> and you should be seeing Jupiter orbiting the Sun. Your orbit should be similar to the one shown in the video below.</li>
+                        <figure class="doc-figure">
+							<video id="jupiter-sun-demo" playsinline muted autoplay loop preload="auto" controls tabindex="-1" aria-hidden="true">
+								<source src="/static/nbody-gui/nbody-gui_Preset-st4.webm" type="video/webm; codecs=vp8">
+								<source src="/static/nbody-gui/nbody-gui_Preset-st4.mp4" type="video/mp4">
+								Your browser does not support the demo video. You can <a href="/static/nbody-gui/nbody-gui_Preset-st4.mp4">download the MP4</a>.
+							</video>
+							<figcaption>Jupiter orbiting the Sun simulation.</figcaption>
+						</figure>
 					</ol>
 				</article>
 				<h2 id="troubleshooting">Troubleshooting</h2>
-				<ul>
-					<li>If the GUI is unresponsive, try refreshing the page and restarting the simulation.</li>
-					<li>Large body counts can slow rendering — reduce particle count or increase timestep.</li>
-					<li>Check the browser console for errors and report them in the project's issue tracker.</li>
-				</ul>
+				<section class="troubleshoot">
+					<h3>Can't open the GUI?</h3>
+					<p>Try these quick checks in order — each one is a common cause:</p>
+					<ol>
+						<li>
+							Run the GUI from the repository root (example):
+							<pre><code>cd nbody-gui
+		python main.py</code></pre>
+						</li>
+						<li>
+							Verify the main file exists (minimal tree view):
+							<pre><code>nbody-gui/
+		└── main.py</code></pre>
+						</li>
+						<li>
+							Use a virtual environment and install dependencies:
+							<pre><code>python -m venv .venv
+		source .venv/bin/activate
+		pip install -r nbody-gui/requirements.txt</code></pre>
+						</li>
+						<li>
+							If it still won't start, run it from the terminal and inspect the error output — common issues are missing packages or an incompatible Python version.
+						</li>
+					</ol>
+					<p>Other tips:</p>
+					<ul>
+						<li>Large body counts can slow rendering — reduce particle count or increase timestep.</li>
+						<li>Check the browser console for errors and report them in the project's issue tracker with the terminal output attached.</li>
+					</ul>
+				</section>
 			</section>
 		</div>
 	</main>
@@ -157,35 +202,37 @@
 	<script>
 	// Make the demo video autoplay/loop and prevent pausing or seeking by user interactions.
 	(function(){
-		const v = document.getElementById('earth-sun-demo');
-		if(!v) return;
-		// Ensure attributes for autoplay behavior
-		v.muted = true;
-		v.playsInline = true;
-		v.autoplay = true;
-		v.loop = true;
-		v.controls = false;
-		// Styling for responsive display
-		v.style.width = '100%';
-		v.style.height = 'auto';
-		v.style.maxWidth = '100%';
-		v.style.borderRadius = '8px';
-		v.style.display = 'block';
-		// poster fallback (if you have a representative PNG)
-		try { v.poster = '/static/nbody-gui/nbody-gui_Earth-Sun-st5.png'; } catch(e) {}
+		const ids = ['earth-sun-demo', 'jupiter-sun-demo'];
+		ids.forEach(id => {
+			const v = document.getElementById(id);
+			if(!v) return;
+			// Ensure attributes for autoplay behavior
+			v.muted = true;
+			v.playsInline = true;
+			v.autoplay = true;
+			v.loop = true;
+			// keep native controls if present in markup
+			// Styling for responsive display
+			v.style.width = '100%';
+			v.style.height = 'auto';
+			v.style.maxWidth = '100%';
+			v.style.borderRadius = '8px';
+			v.style.display = 'block';
+			// poster fallbacks (if you have representative PNGs)
+			try {
+				if (id === 'earth-sun-demo') v.poster = '/static/nbody-gui/nbody-gui_Earth-Sun-st5.png';
+				if (id === 'jupiter-sun-demo') v.poster = '/static/nbody-gui/nbody-gui_Preset-st4.png';
+			} catch(e) {}
 
-		// Track last known time to prevent seeking
-		let lastTime = 0;
-		v.addEventListener('timeupdate', () => { lastTime = v.currentTime; });
+			// Allow user controls and pointer interactions
+			v.style.pointerEvents = 'auto';
 
+			// Try to start playback; browsers may block without user gesture
+			v.play().catch(()=>{});
 
-		// Allow user controls (pause/replay/seek) — no forcing handlers.
-		v.style.pointerEvents = 'auto';
-
-		// Ensure it starts playing (some browsers require play() after user gesture; muted autoplay usually allowed)
-		v.play().catch(()=>{});
-		// Log video errors to the console for diagnostics
-		v.addEventListener('error', (e) => { console.warn('Demo video error', v.error); });
+			// Log video errors to the console for diagnostics
+			v.addEventListener('error', (e) => { console.warn(id + ' demo video error', v.error); });
+		});
 	})();
 	</script>
 </body>
