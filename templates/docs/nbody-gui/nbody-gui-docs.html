@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>N-Body GUI - Usage Guide</title>
+	<link rel="stylesheet" href="/static/styles.css">
+	<style>
+	/* Match body-docs / kosmos styles for screenshots */
+	.code-section { margin-top: 28px; }
+	.code-switcher { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
+	.code-switcher button { background:#0f0f10; color:#dcdcdc; border:1px solid #222; padding:8px 12px; border-radius:8px; cursor:pointer; }
+	.code-switcher button.active { background:#04AA6D; color:#07110a; border-color: #04AA6D; }
+	.code-panel { display:none; background:#0b0b0b; padding:16px; border-radius:8px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); }
+	.doc-layout { display:flex; gap:20px; align-items:flex-start; padding:20px; }
+	.sidebar { background: transparent; padding:10px 6px; }
+	.sidebar-back { color:#dcdcdc; text-decoration:none; display:inline-block; padding:6px 8px; border-radius:6px; background:#0f0f10; }
+	.back-link { display:inline-block; margin-bottom:12px; color:#9ee9c9; text-decoration:none; }
+	.back-link:hover { text-decoration:underline; }
+	.doc-box { background: #071018; padding:20px; border-radius:10px; box-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+	.docs-header h1 { margin:0 0 6px 0; }
+	.muted { color:#bfbfbf; }
+	.control-list { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+	@media (max-width:900px) { .doc-layout { flex-direction:column; } .control-list{grid-template-columns:1fr;} }
+	</style>
+</head>
+<body>
+	<div class="topnav">
+		<a href="/blog">Blog</a>
+		<a class="active" href="/docs">Docs</a>
+		<a href="/install">Install</a>
+		<a href="/">Home</a>
+	</div>
+
+	<div class="doc-layout">
+		<aside class="sidebar">
+			<h3>Contents</h3>
+			<nav>
+				<ul>
+					<li><a href="#overview">Overview</a></li>
+					<li><a href="#getting-started">Getting Started</a></li>
+					<li><a href="#controls">Controls</a></li>
+					<li><a href="#shortcuts">Keyboard Shortcuts</a></li>
+					<li><a href="#screenshots">Screenshot Tips</a></li>
+					<li><a href="#troubleshooting">Troubleshooting</a></li>
+				</ul>
+			</nav>
+			<div style="margin-top:20px;">
+				<a class="sidebar-back" href="/docs/nbody-simulator/nbody-simulator-docs.html">← Back to Simulator Docs</a>
+			</div>
+		</aside>
+
+		<main class="docs-page">
+		<div class="doc-box" style="max-width:900px;margin:0 auto;">
+			<p>
+				<a class="back-link" href="/docs/nbody-simulator/nbody-simulator-docs.html">← Back to N-Body Simulator</a>
+				<a class="back-link" href="/docs/docs-option.html" style="margin-left:12px;">← Docs Home</a>
+			</p>
+			<header class="docs-header">
+				<h1>N-Body GUI — Quick Guide</h1>
+				<p class="muted">How to use the graphical interface to build, run, and capture simulations.</p>
+			</header>
+
+			<section class="docs-content">
+				<h2 id="overview">Overview</h2>
+				<p>The N-Body GUI provides an interactive environment to place bodies, configure simulation parameters, and run the integrator in real time. Use the canvas to drag bodies, the control panel to change parameters, and the playback tools to step or run the simulation.</p>
+
+				<h2 id="getting-started">Getting Started</h2>
+				<ol>
+					<p>Open the GUI by running this command in your terminal at the GUI repository:</p>
+					<pre><code>python main.py</code></pre>
+                    <p>If working properly, the GUI should open and look like the screenshot below.</p>
+                    <figure class="doc-figure">
+                        <img src="/static/nbody-gui/nbody-gui_starting_page.png" alt="N-Body GUI Screenshot">
+                        <figcaption>N-Body GUI main interface.</figcaption>
+				</ol>
+
+				<h2 id="controls">Controls</h2>
+				<div class="control-list">
+					<div>
+						<h4>God Mode</h4>
+						<ul>
+							<li><strong>Left-click</strong>: select / place body</li>
+                            <li><strong>Preset</strong>: Preset of pre-made n-body systems</li>
+	                        <li><strong>Clear All</strong>: Remove all Bodies</li>
+                        </ul>
+					</div>
+					<div>
+						<h4>Simulation Mode</h4>
+						<ul>
+							<li><strong>Play</strong>: run simulation</li>
+							<li><strong>Pause</strong>: pause simulation</li>
+                            <li><strong>Stop & Return</strong>: Stop simulation and return to God Mode</li>
+							<li><strong>Time Warp</strong>: Exponentially increase time steps</li>
+                            <li><strong>Auto CoG</strong>: Move camera to Center of Gravity (CoG)</li>
+                            <li><strong>Capture All</strong>: Camera moves to capture all bodies</li>
+						</ul>
+					</div>
+				</div>
+
+				<h2 id="shortcuts">Keyboard Shortcuts</h2>
+				<ul>
+					<li><kbd>Space</kbd>: toggle play/pause</li>
+					<li><kbd>R</kbd>: reset simulation</li>
+					<li><kbd>Delete</kbd>: remove selected body</li>
+				</ul>
+
+				<h2 id="screenshots">Screenshot Tips</h2>
+				<p>For clean screenshots:</p>
+				<ul>
+					<li>Hide the side panels using the <strong>collapse</strong> control (if available).</li>
+					<li>Increase canvas resolution via the settings before taking screenshots.</li>
+					<li>Use the built-in <strong>Export PNG</strong> feature to capture a crisp image.</li>
+				</ul>
+
+				<h2 id="troubleshooting">Troubleshooting</h2>
+				<ul>
+					<li>If the GUI is unresponsive, try refreshing the page and restarting the simulation.</li>
+					<li>Large body counts can slow rendering — reduce particle count or increase timestep.</li>
+					<li>Check the browser console for errors and report them in the project's issue tracker.</li>
+				</ul>
+			</section>
+		</div>
+	</main>
+	</div>
+</body>
+</html>
+
