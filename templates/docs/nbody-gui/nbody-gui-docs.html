@@ -69,12 +69,12 @@
 				<ol>
 					<p>Open the GUI by running this command in your terminal at the GUI repository:</p>
 					<pre><code>python main.py</code></pre>
-                    <p>If working properly, the GUI should open and look like the screenshot below.</p>
-                    <figure class="doc-figure">
-                        <img src="/static/nbody-gui/nbody-gui_starting_page.png" alt="N-Body GUI Screenshot">
-                        <figcaption>N-Body GUI main interface.</figcaption>
+					<p>If working properly, the GUI should open and look like the screenshot below.</p>
+					<figure class="doc-figure">
+						<img src="/static/nbody-gui/nbody-gui_starting_page.png" alt="N-Body GUI Screenshot">
+						<figcaption>N-Body GUI main interface.</figcaption>
+					</figure>
 				</ol>
-
 				<h2 id="controls">Controls</h2>
 				<div class="control-list">
 					<div>
@@ -97,22 +97,53 @@
 						</ul>
 					</div>
 				</div>
+                <h2 id="walkthroughs">Walkthroughs</h2>
+				<p>Step-by-step examples to set up common systems in the GUI. These walkthroughs are intended to get you a presentable simulation quickly for screenshots or demos.</p>
 
-				<h2 id="shortcuts">Keyboard Shortcuts</h2>
-				<ul>
-					<li><kbd>Space</kbd>: toggle play/pause</li>
-					<li><kbd>R</kbd>: reset simulation</li>
-					<li><kbd>Delete</kbd>: remove selected body</li>
-				</ul>
+				<article class="walkthrough">
+					<h3>Earth–Sun System</h3>
+					<ol>
+						<li>Left click on the black grid to <strong>Add Body</strong>
+                        <figure class="doc-figure">
+                            <img src="/static/nbody-gui/nbody-gui_Earth-Sun-st1.png" alt="Add Body in N-Body GUI">
+                            <figcaption>Adding a new body in God Mode.</figcaption>
+                        </figure>
+						<li>Go into the Body Editor(left side) and name the body <strong>Sun</strong>, then in the mass section click <strong>Sun</strong> to set the mass of this body to a single Sun mass.</li>
+                        <figure class="doc-figure">
+                            <img src="/static/nbody-gui/nbody-gui_Earth-Sun-st2.png" alt="Setting Sun Mass in N-Body GUI">
+                            <figcaption>Setting the name and mass of the Sun in the Body Editor.</figcaption>
+                        </figure>
+						<li>Next, left click some where in the black grid, a new body should appear. In the body editor, call this body <strong>Earth</strong> and in the mass section click <strong>Earth</strong> to set it to Earth's mass.</li>
+                        <figure class="doc-figure">
+                            <img src="/static/nbody-gui/nbody-gui_Earth-Sun-st3.png" alt="Setting Earth Mass in N-Body GUI">
+                            <figcaption>Setting the name and mass of the Earth in the Body Editor.</figcaption>
+                        </figure>
+						<li>Ensure the body editor is still on <strong>Earth</strong>. Next click <strong>Auto Orbit</strong> then <strong>Select Target</strong>. Next click on the <strong>Sun</strong> to set it as the target for Earth's orbit. Lastly, click <strong>Apply Orbit</strong> and you should see a blue line originating from the Earth.</li>
+						<figure class="doc-figure">
+                            <img src="/static/nbody-gui/nbody-gui_Earth-Sun-st4.png" alt="Setting Auto Orbit in N-Body GUI">
+                            <figcaption>Setting Earth's orbit around the Sun using Auto Orbit.</figcaption>
+                        </figure>
+						<li>Finally, press <strong>Play</strong> and you should be seeing Earth orbiting the Sun. If you want, you can use the view controls to adjust the camera. Your orbit should be similar to the one shown in the video below.</li>
+						<figure class="doc-figure">
+							<video id="earth-sun-demo" playsinline muted autoplay loop preload="auto" controls tabindex="-1" aria-hidden="true">
+								<source src="/static/nbody-gui/nbody-gui_Earth-Sun-st5-vp8.webm" type="video/webm; codecs=vp8">
+								<source src="/static/nbody-gui/nbody-gui_Earth-Sun-st5.mp4" type="video/mp4">
+								Your browser does not support the demo video. You can <a href="/static/nbody-gui/nbody-gui_Earth-Sun-st5.mp4">download the MP4</a>.
+							</video>
+							<figcaption>Earth orbiting the Sun simulation.</figcaption>
+						</figure>
+					</ol>
+				</article>
 
-				<h2 id="screenshots">Screenshot Tips</h2>
-				<p>For clean screenshots:</p>
-				<ul>
-					<li>Hide the side panels using the <strong>collapse</strong> control (if available).</li>
-					<li>Increase canvas resolution via the settings before taking screenshots.</li>
-					<li>Use the built-in <strong>Export PNG</strong> feature to capture a crisp image.</li>
-				</ul>
-
+				<article class="walkthrough">
+					<h3>Preset Solar System</h3>
+					<ol>
+						<li>Open the <strong>Presets</strong> menu and choose <strong>Solar System</strong>. This will populate the canvas with Sun, planets, and (optionally) major moons.</li>
+						<li>Inspect the loaded bodies in the inspector panel. For cleaner screenshots, hide or remove small/distant bodies (asteroids) and focus on major planets.</li>
+						<li>Increase canvas resolution and hide side panels (if supported) to produce a clean image.</li>
+						<li>Run the simulation and use <strong>Time Warp</strong> or longer timesteps to show orbital motion quickly. Use the export feature to capture high-quality images.</li>
+					</ol>
+				</article>
 				<h2 id="troubleshooting">Troubleshooting</h2>
 				<ul>
 					<li>If the GUI is unresponsive, try refreshing the page and restarting the simulation.</li>
@@ -123,6 +154,40 @@
 		</div>
 	</main>
 	</div>
+	<script>
+	// Make the demo video autoplay/loop and prevent pausing or seeking by user interactions.
+	(function(){
+		const v = document.getElementById('earth-sun-demo');
+		if(!v) return;
+		// Ensure attributes for autoplay behavior
+		v.muted = true;
+		v.playsInline = true;
+		v.autoplay = true;
+		v.loop = true;
+		v.controls = false;
+		// Styling for responsive display
+		v.style.width = '100%';
+		v.style.height = 'auto';
+		v.style.maxWidth = '100%';
+		v.style.borderRadius = '8px';
+		v.style.display = 'block';
+		// poster fallback (if you have a representative PNG)
+		try { v.poster = '/static/nbody-gui/nbody-gui_Earth-Sun-st5.png'; } catch(e) {}
+
+		// Track last known time to prevent seeking
+		let lastTime = 0;
+		v.addEventListener('timeupdate', () => { lastTime = v.currentTime; });
+
+
+		// Allow user controls (pause/replay/seek) — no forcing handlers.
+		v.style.pointerEvents = 'auto';
+
+		// Ensure it starts playing (some browsers require play() after user gesture; muted autoplay usually allowed)
+		v.play().catch(()=>{});
+		// Log video errors to the console for diagnostics
+		v.addEventListener('error', (e) => { console.warn('Demo video error', v.error); });
+	})();
+	</script>
 </body>
 </html>
 
