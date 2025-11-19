@@ -5,41 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>N-Body Simulation</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <style>
+    /* Color scheme variables */
+    :root{
+        --bg-1: #0b0d0f; /* deep charcoal */
+        --bg-2: #121416; /* slightly lighter charcoal */
+        --card: #121617; /* card background */
+        --muted: #b7c6c3; /* soft muted text */
+        --text: #f6f7f5; /* main text */
+        --accent: #ff8a65; /* warm coral accent */
+        --accent-2: #ffd8bf; /* pale peach for highlights */
+    }
+
+    .hero {
+        background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+        color: var(--text);
+        padding: 56px 20px;
+        text-align: center;
+    }
+    .hero .container { max-width:1100px; margin:0 auto; }
+    .hero h1 { font-size:2.2rem; margin:0 0 8px; }
+    .hero p.lead { color:var(--muted); margin:0 0 18px; font-size:1.05rem; }
+    .cta-row { display:flex; gap:12px; justify-content:center; margin-bottom:8px; }
+    .cta-btn { background:var(--accent); color:#0b0b09; border:none; padding:10px 16px; border-radius:8px; text-decoration:none; font-weight:700; box-shadow:0 6px 18px rgba(255,138,101,0.12); }
+    .cta-btn.secondary { background:transparent; color:var(--accent-2); border:1px solid rgba(255,216,191,0.08); }
+
+    .showcase { display:grid; grid-template-columns: 1fr 420px; gap:24px; align-items:start; max-width:1100px; margin:28px auto; padding:0 20px; }
+    .showcase .intro { color:var(--muted); }
+    .media-card { background:var(--card); padding:14px; border-radius:12px; box-shadow: 0 8px 30px rgba(0,0,0,0.6); display:flex; flex-direction:column; }
+    .media-card img { width:100%; height:auto; max-height:380px; object-fit:cover; display:block; border-radius:10px; }
+
+    .github-links-row { display:flex; gap:18px; margin:18px 0; }
+    .island-gh { background:linear-gradient(180deg, #0e1414 0%, #091111 100%); padding:14px; border-radius:10px; flex:1; text-align:center; color:var(--text); }
+    .island-gh a { color:var(--accent-2); text-decoration:none; }
+    .gh-link { display:inline-flex; gap:8px; align-items:center; justify-content:center; }
+    .gh-icon { width:18px; height:18px; display:inline-block; vertical-align:middle; fill:currentColor; }
+
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; max-width:1100px; margin:20px auto; padding:0 20px; }
+    .feature-card { background:var(--card); padding:18px; border-radius:10px; text-align:left; color:var(--text); box-shadow: 0 8px 20px rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.02); }
+    .feature-card h4 { margin-top:0; color:var(--accent-2); }
+
+    .footer { text-align:center; padding:18px 10px; color:var(--muted); margin-top:28px; }
+
+    @media (max-width:980px){ .showcase{ grid-template-columns:1fr; } .features{ grid-template-columns:1fr; } .github-links-row{ flex-direction:column; } }
+    /* Demo video sizing */
+    .demo video { width:100%; max-height:360px; object-fit:contain; border-radius:8px; }
+    /* Top navigation matching theme */
+    .topnav { display:flex; gap:12px; align-items:center; padding:12px 20px; background: linear-gradient(90deg, rgba(255,138,101,0.03), transparent); }
+    .topnav a { color:var(--muted); text-decoration:none; padding:8px 10px; border-radius:8px; }
+    .topnav a.active { background:var(--accent); color:#0b0b09; font-weight:700; }
+    .topnav a:hover { color:var(--text); }
+
+    /* Footer theme */
+    .footer { background: linear-gradient(180deg, rgba(255,138,101,0.03), rgba(0,0,0,0.02)); border-top:1px solid rgba(255,255,255,0.04); box-shadow: 0 -6px 30px rgba(0,0,0,0.35); padding:22px 10px; }
+    .footer a { color:var(--accent-2); text-decoration:none; }
+    .footer .links { display:flex; gap:18px; align-items:center; justify-content:center; margin-top:8px; }
+    .footer .links a { display:inline-flex; gap:8px; align-items:center; color:var(--muted); }
+    </style>
 </head>
 <body>
-     <div class="topnav">
-        
-        <a href="blog">Blog</a>
-        <a href="docs">Docs</a>
-        <a href="install">Install</a>
+    <div class="topnav">
         <a class="active" href="/">Home</a>
-    </div> 
+        <a href="/docs">Docs</a>
+        <a href="/install">Install</a>
+        <a href="/blog">Blog</a>
+    </div>
 
-    <!-- Small center island describing what the nbody simulator is -->
-    <div class="island">
-        <h2>NBody Simulator</h2>
-        <p>N body simulator using a C++ engine which is then connected to a python GUI</p>
-    </div>
-        <!-- Video island -->
-        <div class="island-gray">
-            <video controls autoplay muted style="border-radius: 24px; width: 100%; max-width: 300px; display: block; margin: 0 auto;">
-                <source src="/static/Screencast from 2025-11-17 13-55-16.webm" type="video/webm">
-                Your browser does not support the video tag.
-            </video>
+    <header class="hero">
+        <div class="container">
+            <h1>N-Body Simulator</h1>
+            <p class="lead">Fast, flexible gravitational simulations — a C++ physics engine with a Python GUI for editing, running and capturing simulations.</p>
+            <div class="cta-row">
+                <a class="cta-btn" href="/docs">Read Docs</a>
+                <a class="cta-btn secondary" href="/install">Install</a>
+            </div>
+            <small style="color:var(--muted);">Open-source — contributions welcome on GitHub</small>
         </div>
-    <!-- Github links to nbody engine and nbody gui, side by side under the video -->
-    <div class="github-links-row">
-        <div class="island-gh">
-            <h3>NBody Engine</h3>
-            <p><a href="https://github.com/TegranGrigorian/n-body-simulator">GitHub Link</a></p>
+    </header>
+
+    <section class="showcase">
+        <div class="intro">
+            <h3 style="margin-top:0;color:var(--text);">About this project</h3>
+            <p class="muted" style="color:var(--muted);">This project pairs a high-performance C++ N-body engine with a Python GUI that lets you compose, run, and capture gravitational simulations. The GUI is designed for rapid scene composition, reproducible presets, and easy capture of screenshots or short screencasts for teaching and demos.</p>
+            <ul style="margin-top:12px;color:var(--muted);line-height:1.4;">
+                <li>Use cases: teaching, demonstrations, small research experiments</li>
+                <li>Works with presets or fully custom body setups</li>
+            </ul>
+            <div class="github-links-row">
+                        <div class="island-gh">
+                            <h4 style="margin:0 0 6px 0;color:var(--accent-2);">NBody Engine</h4>
+                            <p style="margin:0;"><a class="gh-link" href="https://github.com/TegranGrigorian/n-body-simulator"><svg class="gh-icon" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.66 7.66 0 018 4.77c.68.003 1.36.092 2 .27 1.52-1.04 2.19-.82 2.19-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>GitHub</a></p>
+                        </div>
+                        <div class="island-gh">
+                            <h4 style="margin:0 0 6px 0;color:var(--accent-2);">NBody GUI</h4>
+                            <p style="margin:0;"><a class="gh-link" href="https://github.com/TegranGrigorian/nbody-gui"><svg class="gh-icon" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.66 7.66 0 018 4.77c.68.003 1.36.092 2 .27 1.52-1.04 2.19-.82 2.19-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>GitHub</a></p>
+                        </div>
+            </div>
+            
         </div>
-        <div class="island-gh">
-            <h3>NBody GUI</h3>
-            <p><a href="https://github.com/TegranGrigorian/nbody-gui">GitHub Link</a></p>
+        <aside class="media-card">
+            <img src="/static/nbody-gui/nbody-gui_Earth-Sun-st1.png" alt="N-Body GUI screenshot">
+            <div style="padding-top:12px;color:var(--muted);">
+                <p style="margin:0 0 8px 0;color:var(--text);font-weight:600;">N-Body GUI — interactive editing and capture</p>
+                <p style="margin:0 0 12px 0;">Open the GUI to place bodies, tune parameters, and run the integrator in real time. The interface makes it easy to compose scenes and produce reproducible simulations.</p>
+            </div>
+        </aside>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <h4>Interactive GUI</h4>
+            <p>Drag and drop bodies, configure properties, set auto-orbits, and capture the view for screenshots and demos.</p>
         </div>
-    </div>
+        <div class="feature-card">
+            <h4>High-performance Engine</h4>
+            <p>Written in C++ for speed; bindings allow running large simulations with efficient integration schemes.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Reproducible Presets</h4>
+            <p>Built-in presets (Solar System, test setups) help you create consistent scenes for teaching and demos.</p>
+        </div>
+    </section>
+
+    <section class="demo" style="max-width:1100px;margin:28px auto;padding:0 20px;">
+        <div style="background:var(--card);padding:18px;border-radius:12px;color:var(--text);box-shadow:0 8px 30px rgba(0,0,0,0.5);">
+            <h3 style="margin-top:0;color:var(--accent-2);">Simulate Complex Systems</h3>
+            <p style="color:var(--muted);">Recreate systems from literature or construct your own. For example, explore chaotic three-body interactions like those described in Cixin Liu's work — then capture the result as a short video.</p>
+            <div style="margin-top:14px;">
+                <video class="demo" controls playsinline preload="metadata">
+                    <source src="/static/Screencast from 2025-11-17 13-55-16.webm" type="video/webm">
+                    Your browser does not support the demo video. <a href="/static/Screencast from 2025-11-17 13-55-16.webm">Download it here</a>.
+                </video>
+            </div>
+        </div>
+    </section>
+
     <footer class = "footer">
-        <p>Tegran Grigorian <a href="https://github.com/TegranGrigorian">GitHub</a></p>
+        <p style="margin:0;color:var(--muted);">Tegran Grigorian · <a href="/docs">Documentation</a></p>
+        <div class="links">
+            <a class="gh-link" href="https://github.com/TegranGrigorian">
+                <svg class="gh-icon" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.66 7.66 0 018 4.77c.68.003 1.36.092 2 .27 1.52-1.04 2.19-.82 2.19-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                <span>GitHub</span>
+            </a>
+            <a href="https://www.linkedin.com/in/tegran-grigorian/" title="LinkedIn">
+                <svg class="gh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.98h4V24h-4V8.98zM9.5 8.98h3.84v2.05h.05c.54-1.02 1.86-2.1 3.83-2.1 4.1 0 4.86 2.7 4.86 6.22V24h-4v-7.1c0-1.69-.03-3.87-2.36-3.87-2.36 0-2.72 1.84-2.72 3.75V24h-4V8.98z"/></svg>
+                <span>LinkedIn</span>
+            </a>
+            <a href="https://portfolio.tegrangrigorian.work/" title="Portfolio">
+                <svg class="gh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v2h3.59L8 14.59 9.41 16 19 6.41V10h2V3zM5 5h6v2H7v10h10v-4h2v6H5z"/></svg>
+                <span>Portfolio</span>
+            </a>
+        </div>
     </footer>
 </body>
 </html>
