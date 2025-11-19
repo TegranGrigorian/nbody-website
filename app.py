@@ -36,7 +36,7 @@ def docs_option():
 
 @app.route('/docs/nbody-gui')
 def body_docs_html():
-    return flask.render_template('/docs/nbody-gui/nbody-gui-docs.html')
+    return flask.render_template('docs/nbody-gui/nbody-gui-docs.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
