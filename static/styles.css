@@ -165,7 +165,7 @@ body {
 
 .docs-row { display: flex; gap: 24px; width: 100%; max-width: 980px; justify-content: center; }
 .doc-box { background: #1b1a1a; color: #e8e8e8; padding: 20px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.6); flex: 1 1 0; min-width: 260px; max-width: 460px; }
-.doc-box h3 { color: #04AA6D; margin-top: 0; }
+.doc-box h3 { color: var(--accent) !important; margin-top: 0; }
 .doc-box p { color: #d0d0d0; }
 .doc-box a { color: #9ee9c9; }
 
@@ -192,9 +192,11 @@ body {
 .doc-box img {
   max-width: 100%;
   height: auto;
+  max-height: 420px; /* prevent extremely tall images */
+  object-fit: contain;
   display: block;
   margin: 18px auto;
-  border-radius: 3px;
+  border-radius: 6px;
 }
 .doc-figure figcaption {
   color: #bfbfbf;
@@ -218,7 +220,7 @@ body {
   max-width: 420px;
   transition: transform .12s ease, box-shadow .12s ease;
 }
-.doc-card h3 { color: #04AA6D; margin-top: 0; }
+.doc-card h3 { color: var(--accent) !important; margin-top: 0; }
 .doc-card p { color: #d0d0d0; }
 .doc-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.6); }
 
@@ -263,7 +265,7 @@ body {
   background: var(--card) !important;
   color: var(--text) !important;
 }
-.media-card img, .doc-figure img { width:100% !important; height:auto !important; max-height:380px !important; object-fit:cover !important; border-radius:10px !important; }
+.media-card img, .doc-figure img { width:100% !important; height:auto !important; max-height:420px !important; object-fit:contain !important; border-radius:10px !important; }
 .demo video { width:100% !important; max-height:360px !important; object-fit:contain !important; border-radius:8px !important; }
 
 /* Feature cards and states */
