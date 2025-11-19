@@ -381,8 +381,14 @@ b.update(dt)</code></pre>
 
     <script>
     // keep switcher function for compatibility (no-op when not used)
-    function switchCode(evt) {
-        const btn = evt.currentTarget;
+        <footer class="footer">
+            <p style="margin:0;color:var(--muted);">Tegran Grigorian · <a href="/docs">Documentation</a> · <a href="/install">Install</a> · <a href="https://github.com/TegranGrigorian" target="_blank" rel="noopener">GitHub</a></p>
+            <div class="links" style="margin-top:8px;">
+                <a href="/docs">Docs</a>
+                <a href="/install">Install</a>
+                <a href="https://github.com/TegranGrigorian" target="_blank" rel="noopener">GitHub</a>
+            </div>
+        </footer>
         const group = btn.getAttribute('data-group');
         const lang = btn.getAttribute('data-lang');
         document.querySelectorAll('.code-switcher button[data-group="'+group+'"]').forEach(b => b.classList.remove('active'));
@@ -391,7 +397,6 @@ b.update(dt)</code></pre>
             if (panel.getAttribute('data-lang') === lang) panel.style.display = 'block';
             else panel.style.display = 'none';
         });
-    }
     </script>
 </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>

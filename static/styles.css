@@ -311,9 +311,32 @@ body {
 .doc-figure figcaption, .muted { color: var(--muted) !important; }
 
 /* Footer styling */
-.footer { background: linear-gradient(180deg, rgba(255,138,101,0.03), rgba(0,0,0,0.02)) !important; border-top:1px solid rgba(255,255,255,0.04) !important; box-shadow: 0 -6px 30px rgba(0,0,0,0.35) !important; padding:22px 10px !important; color: var(--muted) !important; }
+.footer {
+  position: relative;
+  padding: 24px 16px !important;
+  text-align: center;
+  color: var(--muted) !important;
+  background: linear-gradient(180deg, rgba(255,138,101,0.06), rgba(0,0,0,0.05)) !important;
+  border-top: 1px solid rgba(255,255,255,0.06) !important;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.45) !important;
+  font-size: 0.95rem !important;
+}
+
+.footer::before {
+  content: "";
+  display: block;
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 4px 4px 0 0;
+  width: 100%;
+  position: absolute;
+  top: -6px;
+  left: 0;
+}
+
 .footer a { color: var(--accent-2) !important; text-decoration: none !important; }
-.footer .links a { color: var(--muted) !important; display:inline-flex; gap:8px; align-items:center; }
+.footer .links { display:flex; gap:18px; align-items:center; justify-content:center; margin-top:8px; flex-wrap:wrap; }
+.footer .links a { color: var(--muted) !important; }
 
 @media (max-width: 980px){
   .showcase{ grid-template-columns:1fr !important; }
